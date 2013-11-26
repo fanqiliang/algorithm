@@ -14,13 +14,15 @@ int func_a(int n, int k) {
         return (func_a(n-k, k) + func_a(n, k-1));
 }
 
-int func_b(int n) {
+int func_b(int n, int k) {
     int i;
-    int count = 0;
-    for (i = 1; i <= n-i; i++) {
-        count++;
-    }
-    return count;
+
+    if (n < k || k <= 0 || n <= 0)
+        return 0;
+    else if (k == 1)
+        return 1;
+    else 
+        return (func_b(n-k, k) + func_b(n-1, k-1));
 }
 
 int func_c(int n, int k) {
@@ -53,7 +55,7 @@ int main() {
     printf("please input the number of n and k:\n");
     scanf("%d %d", &n, &k);
     printf("%d\n", func_a(n, n));
-    printf("%d\n", func_b(n));
+    printf("%d\n", func_b(n, k));
     printf("%d\n", func_a(n ,k));
     printf("%d\n", func_c(n ,n));
     printf("%d\n", func_d(n));
