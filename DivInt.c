@@ -57,4 +57,5 @@ int main() {
     printf("%d\n", func_a(n ,k));
     printf("%d\n", func_c(n ,n));
     printf("%d\n", func_d(n));
+    printf("\n");
 }
