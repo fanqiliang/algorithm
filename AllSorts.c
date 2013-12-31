@@ -124,39 +124,89 @@ void BucketSort(int Array[], int low, int high) {
         if (key < Array[i])
             key = Array[i];
     }
-    int buckets[key];
-    for (int i = 0; i < key; i++) {
+    int buckets[key+1];
+    for (int i = 0; i <= key; i++) {
         buckets[i] = 0;
     }
     for (int i = 0; i < high-low+1; i++)
-        buckets[Array[i]]++;
+        (buckets[Array[i]])++;
     for (int i = 0, j = 0; j <= key; j++)
-        for (int k = buckets[j]; k > 0; k--)
-            Array[i++] = j;
+        for (int k = buckets[j]; k > 0; k--) {
+            Array[i] = j;
+            i++;
+        }
     return;
 }
 
 int main() {
     int n = 0;
-    printf("please input n:");
-    scanf("%d", &n);
-    int Array[n];
-    srand((unsigned)time(NULL));
-    for (int i; i < n; i++) {
-        Array[i] = rand()%n;
+    for (int i = 0, n = 10; i < 5; i++, n = n*10) {
+        if (n == 100000)
+            n = 30000;
+        int Array[n];
+        int array[n];
+        srand((unsigned)time(NULL));
+        for (int i = 0; i < n; i++) {
+            Array[i] = rand()%n;
+        }
+        memcpy(array, Array, n*sizeof(int));
+        printf("\n");
+        int low = 0;
+        int high = 0;
+        high= sizeof(Array)/sizeof(int);
+        printf("high = %d\n", high);
+        high -= 1;
+        clock_t start, end;
+        start = clock();
+        for (int j = 0; j < 5; j++) {
+            memcpy(Array, array, n*sizeof(int));
+            QuickSort(Array, low, high);
+        }
+        end = clock();
+        printf("QuickSort time is %f seconds\n", (double)((end-start)/5));
+        srand((unsigned)time(NULL));
+        start = clock();
+        for (int j = 0; j < 5; j++) {
+            memcpy(Array, array, n*sizeof(int));
+            BullbeSort(Array, low, high);
+        }
+        end = clock();
+        printf("BullbeSort time is %f seconds\n", (double)((end-start)/5));
+        srand((unsigned)time(NULL));
+        start = clock();
+        for (int j = 0; j < 5; j++) {
+            memcpy(Array, array, n*sizeof(int));
+            ShellSort(Array, low, high);
+        }
+        end = clock();
+        printf("ShellSort time is %f seconds\n", (double)((end-start)/5));
+        srand((unsigned)time(NULL));
+        start = clock();
+        for (int j = 0; j < 5; j++) {
+            memcpy(Array, array, n*sizeof(int));
+            MergeSort(Array, low, high);
+        }
+        end = clock();
+        printf("MerfeSort time is %f seconds\n", (double)((end-start)/5));
+        srand((unsigned)time(NULL));
+        start = clock();
+        for (int j = 0; j < 5; j++) {
+            memcpy(Array, array, n*sizeof(int));
+            InsertSort(Array, low, high);
+        }
+        end = clock();
+        printf("InsertSort time is %f seconds\n", (double)((end-start)/5));
+        srand((unsigned)time(NULL));
+        start = clock();
+        for (int j = 0; j < 5; j++) {
+            memcpy(Array, array, n*sizeof(int));
+            BucketSort(Array, low, high);
+        }
+        end = clock();
+        printf("BucketSort time is %f seconds\n", (double)((end-start)/5));
     }
-    int low = 0;
-    int high = 0;
-    high= sizeof(Array)/sizeof(int);
-    high -= 1;
-    QuickSort(Array, low, high);
-    BullbeSort(Array, low, high);
-    ShellSort(Array, low, high);
-    MergeSort(Array, low, high);
-    InsertSort(Array, low, high-1);
-    BucketSort(Array, low, high);
-    for (int i = 0; i < n; i++) {
-        printf("%d ", Array[i]);
-    }
-    printf("\n");
+   // for (int i = 0; i < 100000; i++) {
+   //     printf("%d ", Array[i]);
+   // }
+   // printf("\n");
 }

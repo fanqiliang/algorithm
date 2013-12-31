@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
+//二分查找
 int BinarySearch(int B[], int value, int len) {
     int begin = 0;
     int end = len - 1;
@@ -22,11 +24,11 @@ void LIS(int Array[], int n, int in) {
     int BBB[n];
     int BBBB[in+1];
     int len = 1;
-    B[0] = Array[0];
-    BB[0] = 0;
-    BBB[0] = 0;
+    B[0] = Array[0];//存储LIS最小的末尾
+    BB[0] = 0;      //存储LIS最小末尾的位置
+    BBB[0] = 0;     //存储每一个数在最小末尾序列中所出现过的位置
     for (int i = 0; i < in+1; i++) {
-        BBBB[i] = -1;
+        BBBB[i] = -1;//存储一个最长子序列
     }
     for (int i = 1; i < n; i++) {
         if (Array[i] > B[len-1]) {
@@ -73,17 +75,20 @@ void LIS(int Array[], int n, int in) {
     }
     printf("\n");
 }
-
+//最长递增子序列，时间复杂度为nlg（n）
 int main() {
     int n;
     printf("please input n:");
     scanf("%d", &n);
     int Array[n];
-   srand((unsigned)time(NULL));
+
+    //随机生成n个数
+    srand((unsigned)time(NULL));
     for (int i = 0; i < n; i++) {
         Array[i] = rand()%n;
         //printf("Array[%d] = %d\n", i, Array[i]);
     }
+
     int in;
     printf("please input tht in:");
     scanf("%d", &in);

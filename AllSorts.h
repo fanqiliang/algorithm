@@ -1,6 +1,7 @@
 #ifndef  ALLSORTS_H
 #define  ALLSORTS_H
 #include <stdio.h>
+#include <string.h>
 
 extern void BullbeSort(int Array[], int low, int high);
 
