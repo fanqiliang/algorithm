@@ -13,7 +13,7 @@ void func(int n) {
         }
     }
     if (n == 1) {
-        printf("1");
+        printf("1\n");
         return;
     }
     r = (n-1) / 2;

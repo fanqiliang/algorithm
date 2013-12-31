@@ -1,5 +1,6 @@
 #include "AllSorts.h"
-
+#include <time.h>
+#include <stdlib.h>
 
 //冒泡排序
 void BullbeSort(int Array[], int low ,int high) {
@@ -129,27 +130,33 @@ void BucketSort(int Array[], int low, int high) {
     }
     for (int i = 0; i < high-low+1; i++)
         buckets[Array[i]]++;
-    for (int i = 0, j = 0; j < key; j++)
+    for (int i = 0, j = 0; j <= key; j++)
         for (int k = buckets[j]; k > 0; k--)
             Array[i++] = j;
     return;
 }
 
 int main() {
-   int Array[] = {1,4,7,4,6,7,10};
-   int low = 0;
-   int high = 0;
-   high= sizeof(Array)/sizeof(int);
-   high -= 1;
-   //printf("high = %d", high);
-   //QuickSort(Array, low, high);
-   //BullbeSort(Array, low, high);
-   //ShellSort(Array, low, high);
-   //MergeSort(Array, low, high);
-   //InsertSort(Array, low, high-1);
-   BucketSort(Array, low, high);
-   for (int i = low; i <= high; i++) {   
-       printf("%d ", Array[i]);
-   }
-   printf("\n");
+    int n = 0;
+    printf("please input n:");
+    scanf("%d", &n);
+    int Array[n];
+    srand((unsigned)time(NULL));
+    for (int i; i < n; i++) {
+        Array[i] = rand()%n;
+    }
+    int low = 0;
+    int high = 0;
+    high= sizeof(Array)/sizeof(int);
+    high -= 1;
+    QuickSort(Array, low, high);
+    BullbeSort(Array, low, high);
+    ShellSort(Array, low, high);
+    MergeSort(Array, low, high);
+    InsertSort(Array, low, high-1);
+    BucketSort(Array, low, high);
+    for (int i = 0; i < n; i++) {
+        printf("%d ", Array[i]);
+    }
+    printf("\n");
 }
