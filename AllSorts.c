@@ -19,7 +19,7 @@ void BullbeSort(int Array[], int low ,int high) {
 //插入排序
 void InsertSort(int Array[], int low, int high) {
 
-    for (int i = low+1; i < high; i++) {
+    for (int i = low+1; i <= high; i++) {
         int temp = Array[i];
         int j = i - 1;
         while ((j >= low) && (Array[j] > temp)) {
@@ -61,10 +61,10 @@ void QuickSort(int Array[],  int low, int high) {
 //希尔排序
 void ShellSort(int Array[], int low, int high) {
     int j = 0;
-    for (int gap = high/2; gap > 0; gap /= 2) {
-        for (int i = low; i < high; i++) {
+    for (int gap = (high+1)/2; gap > 0; gap /= 2) {
+        for (int i = low; i <= high; i++) {
             int temp = Array[i];
-            for (j = i; j >= low && j+gap < high 
+            for (j = i; j >= low && j+gap <= high 
                     && temp > Array[j+gap]; j += gap) {
                 temp = Array[j];
                 Array[j] = Array[j+gap];
@@ -142,10 +142,10 @@ int main() {
     int n = 0;
     for (int i = 0, n = 10; i < 5; i++, n = n*10) {
         if (n == 100000)
-            n = 30000;
+            n = 10000;
         int Array[n];
         int array[n];
-        srand((unsigned)time(NULL));
+        srand((unsigned)clock());
         for (int i = 0; i < n; i++) {
             Array[i] = rand()%n;
         }
@@ -163,7 +163,13 @@ int main() {
             QuickSort(Array, low, high);
         }
         end = clock();
-        printf("QuickSort time is %f seconds\n", (double)((end-start)/5));
+        if (n == 10) {
+            for (int i = 0; i < 10; i++) {
+                printf("%d ", Array[i]);
+            }
+            printf("\n");
+        }
+        printf("QuickSort time is %f\n", (double)((end-start)/5));
         srand((unsigned)time(NULL));
         start = clock();
         for (int j = 0; j < 5; j++) {
@@ -171,7 +177,13 @@ int main() {
             BullbeSort(Array, low, high);
         }
         end = clock();
-        printf("BullbeSort time is %f seconds\n", (double)((end-start)/5));
+        if (n == 10) {
+            for (int i = 0; i < 10; i++) {
+                printf("%d ", Array[i]);
+            }
+            printf("\n");
+        }
+        printf("BullbeSort time is %f\n", (double)((end-start)/5));
         srand((unsigned)time(NULL));
         start = clock();
         for (int j = 0; j < 5; j++) {
@@ -179,7 +191,13 @@ int main() {
             ShellSort(Array, low, high);
         }
         end = clock();
-        printf("ShellSort time is %f seconds\n", (double)((end-start)/5));
+        if (n == 10) {
+            for (int i = 0; i < 10; i++) {
+                printf("%d ", Array[i]);
+            }
+            printf("\n");
+        }
+        printf("ShellSort time is %f\n", (double)((end-start)/5));
         srand((unsigned)time(NULL));
         start = clock();
         for (int j = 0; j < 5; j++) {
@@ -187,7 +205,13 @@ int main() {
             MergeSort(Array, low, high);
         }
         end = clock();
-        printf("MerfeSort time is %f seconds\n", (double)((end-start)/5));
+        if (n == 10) {
+            for (int i = 0; i < 10; i++) {
+                printf("%d ", Array[i]);
+            }
+            printf("\n");
+        }
+        printf("MerfeSort time is %f\n", (double)((end-start)/5));
         srand((unsigned)time(NULL));
         start = clock();
         for (int j = 0; j < 5; j++) {
@@ -195,7 +219,13 @@ int main() {
             InsertSort(Array, low, high);
         }
         end = clock();
-        printf("InsertSort time is %f seconds\n", (double)((end-start)/5));
+        if (n == 10) {
+            for (int i = 0; i < 10; i++) {
+                printf("%d ", Array[i]);
+            }
+            printf("\n");
+        }
+        printf("InsertSort time is %f\n", (double)((end-start)/5));
         srand((unsigned)time(NULL));
         start = clock();
         for (int j = 0; j < 5; j++) {
@@ -203,10 +233,12 @@ int main() {
             BucketSort(Array, low, high);
         }
         end = clock();
-        printf("BucketSort time is %f seconds\n", (double)((end-start)/5));
+        if (n == 10) {
+            for (int i = 0; i < 10; i++) {
+                printf("%d ", Array[i]);
+            }
+            printf("\n");
+        }
+        printf("BucketSort time is %f\n", (double)((end-start)/5));
     }
-   // for (int i = 0; i < 100000; i++) {
-   //     printf("%d ", Array[i]);
-   // }
-   // printf("\n");
 }

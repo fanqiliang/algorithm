@@ -18,16 +18,16 @@ int BinarySearch(int B[], int value, int len) {
     return begin;
 }
 
-void LIS(int Array[], int n, int in) {
+void LIS(int Array[], int n) {
     int B[n];
     int BB[n];
     int BBB[n];
-    int BBBB[in+1];
+    int BBBB[n];
     int len = 1;
     B[0] = Array[0];//存储LIS最小的末尾
     BB[0] = 0;      //存储LIS最小末尾的位置
     BBB[0] = 0;     //存储每一个数在最小末尾序列中所出现过的位置
-    for (int i = 0; i < in+1; i++) {
+    for (int i = 0; i < n; i++) {
         BBBB[i] = -1;//存储一个最长子序列
     }
     for (int i = 1; i < n; i++) {
@@ -38,30 +38,19 @@ void LIS(int Array[], int n, int in) {
             len++;
         } else {
             int m = BinarySearch(B, Array[i], len);
-            printf("m = %d\n", m);
             if (B[m] != Array[i]) {
                 B[m] = Array[i];
             }
             BBB[i] = m;
         }
     }
-    //for (int i = 0; i < len; i++) {
-    //    printf("B[] = %d\n", B[i]);
-    //}
-    //for (int i = 0; i < n; i++) {
-    //    printf("BBB[%d] = %d\n", i, BBB[i]);
-    //}
-    if (in+1 > len) {
-        printf("in is too bigan.\n");
-        exit(0);
-    }
-    int lin = in;
+    int lin = len-1;
     for (int i = n-1; i >=0 && lin >= 0; i--) {
-        if (BBBB[in] == -1 && BBB[i] == in) {
-            BBBB[in] = Array[i];
+        if (BBBB[len-1] == -1 && BBB[i] == len-1) {
+            BBBB[len-1] = Array[i];
             lin--;
         }
-        if (BBBB[in] != -1 
+        if (BBBB[len-1] != -1 
                 && BBBB[lin+1] != -1 
                 && BBB[i] == lin 
                 && BBBB[lin+1] > Array[i]) {
@@ -69,13 +58,15 @@ void LIS(int Array[], int n, int in) {
             lin--;
         }
     }
-    printf("最长递增子序列为:");
-    for (int i = 0; i <= in; i++) {
+    printf("最长递增子序列的长度为：%d\n", len);
+    printf("最长递增子序列为:\n");
+    for (int i = 0; i < len; i++) {
         printf("%d ", BBBB[i]);
     }
     printf("\n");
 }
-//最长递增子序列，时间复杂度为nlg（n）
+
+//最长递增子序列，时间复杂度为nlog（n）
 int main() {
     int n;
     printf("please input n:");
@@ -83,14 +74,18 @@ int main() {
     int Array[n];
 
     //随机生成n个数
+    printf("生成的随机序列为：\n");
     srand((unsigned)time(NULL));
-    for (int i = 0; i < n; i++) {
+    for (int i = 0, t = 0; i < n; i++) {
         Array[i] = rand()%n;
-        //printf("Array[%d] = %d\n", i, Array[i]);
+        printf("%d ", Array[i]);
+        t++;
+        if (t == 10) {
+            printf("\n");
+            t = 0;
+        }
     }
+    printf("\n");
 
-    int in;
-    printf("please input tht in:");
-    scanf("%d", &in);
-    LIS(Array, n ,in-1);
+    LIS(Array, n);
 }
