@@ -60,21 +60,20 @@ void QuickSort(int Array[],  int low, int high) {
 
 //希尔排序
 void ShellSort(int Array[], int low, int high) {
-    int j = 0, i = 0;
-    int min;
-    int temp;
-    for (int gap = (high+1)/2; gap > 0; gap /= 2) {
-        for (i = low; i <= high; i += gap) {
-            min = i;
-            for (j = i; j <= high; j += gap) {
-                if (Array[j] < Array[min])
-                    min = j;
-            }
-            if (i != min) {
-                temp = Array[i];
-                Array[i] = Array[min];
-                Array[min] = temp;
-            }
+    int i,j;
+    int n = high + 1;
+    for (int gap = n/2; gap > 0; gap /= 2) {
+        for (i = 0; i < gap; i++) {
+            for (j = i + gap; j < n; j += gap)
+                if (Array[j] < Array[j-gap]) {
+                    int temp = Array[j];
+                    int k = j - gap;
+                    while (k >= 0 && Array[k] > temp) {
+                        Array[k+gap] = Array[k];
+                        k -= gap;
+                    }
+                    Array[k+gap] = temp;
+                }
         }
     }
     return;
